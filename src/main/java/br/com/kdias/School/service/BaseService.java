@@ -7,9 +7,9 @@ import java.util.Optional;
 
 abstract class BaseService {
 
-    void verifyNotFound(Optional<?> optional){
+    void verifyNotFound(String erro, Optional<?> optional){
         if(!optional.isPresent()){
-            throw new NotFoundException("Not Found");
+            throw new NotFoundException(erro);
         }
     }
 

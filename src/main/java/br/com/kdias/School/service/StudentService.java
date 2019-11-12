@@ -2,6 +2,7 @@ package br.com.kdias.School.service;
 
 import br.com.kdias.School.exception.NotFoundException;
 import br.com.kdias.School.form.StudentForm;
+import br.com.kdias.School.model.Course;
 import br.com.kdias.School.model.Student;
 import br.com.kdias.School.repository.StudentRespository;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.ErrorMessages;
@@ -19,6 +20,9 @@ public class StudentService extends BaseService {
     @Autowired
     private StudentRespository studentRespository;
 
+    @Autowired
+    private CourseService courseService;
+
     public Page<Student> findAll(Pageable pageable){
         return studentRespository.findAll(pageable);
     }
@@ -29,21 +33,24 @@ public class StudentService extends BaseService {
 
     public Student findById(Long id){
         Optional<Student> student = studentRespository.findById(id);
-        super.verifyNotFound(student);
+        super.verifyNotFound("Student not found",student);
         return student.get();
     }
 
     public Student save(StudentForm studentForm){
-
         Student student = new Student();
+        Course course = courseService.findById(studentForm.getCurso());
+
         student.setName(studentForm.getName());
+        student.setCourse(course);
+
         return studentRespository.save(student);
     }
 
     public Student update(Long id,StudentForm studentForm){
         Optional<Student> studentOptional = studentRespository.findById(id);
 
-        super.verifyNotFound(studentOptional);
+        super.verifyNotFound("Student not found",studentOptional);
 
         Student student = studentOptional.get();
         student.setName(studentForm.getName());
@@ -52,7 +59,7 @@ public class StudentService extends BaseService {
 
     public void delete(Long id){
         Optional<Student> student = studentRespository.findById(id);
-        super.verifyNotFound(student);
+        super.verifyNotFound("Student not found",student);
         studentRespository.deleteById(id);
     }
 
