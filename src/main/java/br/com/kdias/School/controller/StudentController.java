@@ -22,7 +22,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public Page<Student> helloWorld(Pageable pageable, @RequestParam(required = false) String name){
+    public Page<Student> getStudentPaged(Pageable pageable, @RequestParam(required = false) String name){
         if(Objects.nonNull(name)){
             return studentService.findAllByName(pageable,name);
         }
