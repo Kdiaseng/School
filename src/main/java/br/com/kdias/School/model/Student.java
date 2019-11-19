@@ -1,5 +1,6 @@
 package br.com.kdias.School.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter @Setter
 //@Table(name = "nameTable" )
 public class Student extends BaseEntity{
-    private String name;
+       private String name;
 
     @OneToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
