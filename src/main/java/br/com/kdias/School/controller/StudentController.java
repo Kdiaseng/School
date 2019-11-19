@@ -30,7 +30,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Student> findByid(@PathVariable Long id){
+    public ResponseEntity<Student> findById(@PathVariable Long id){
         return ResponseEntity.ok(studentService.findById(id));
     }
 
