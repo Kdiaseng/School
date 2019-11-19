@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+//@Table(name = "nameTable" )
 public class Student extends BaseEntity{
     private String name;
 
